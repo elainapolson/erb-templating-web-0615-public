@@ -8,7 +8,7 @@ class Movie
   def initialize(title, release_date, director, summary)
     @id = id
     @title = title
-    @release_date = release_date
+    @release_date = release_date.to_i
     @director = director
     @summary = summary
     @@all << self
@@ -29,12 +29,8 @@ class Movie
   def self.make_movies!
     File.open("spec/fixtures/movies.txt") do |f|
       f.each_line do |line|
-        movie_array = line.split("-")
-        title = movie_array[0].strip
-        release_date = movie_array[1].strip.to_i
-        director = movie_array[2].strip
-        summary = movie_array[3].strip
-        line = Movie.new(title, release_date, director, summary)
+        movie_array = line.split(" - ")
+        Movie.new(*movie_array)
       end
     end
   end

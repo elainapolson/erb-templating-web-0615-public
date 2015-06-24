@@ -7,13 +7,13 @@ class SiteGenerator
 
     beginning_of_string = "<!DOCTYPE html><html><head><title>Movies</title></head><body><ul>"
     
-    @movies_loop = @movies.collect do |movie|
+    movies_loop = @movies.collect do |movie|
       "<li><a href=\"movies/#{movie.url}\">#{movie.title}</a></li>"
     end.join("")
 
     end_of_string = "</ul></body></html>"
 
-    full_string = "#{beginning_of_string}#{@movies_loop}#{end_of_string}"
+    full_string = "#{beginning_of_string}#{movies_loop}#{end_of_string}"
     File.write("_site/index.html", full_string)
   end
 
